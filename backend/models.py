@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String,ForeignKey
+from xmlrpc.client import Boolean
+from sqlalchemy import Column, Integer, String,Boolean
 from database import Base
 from sqlalchemy.orm import relationship
 
@@ -11,9 +12,9 @@ class User(Base):
     email = Column(String(255))
     phone = Column(String(255))
     video_link = Column(String(255))
-    brushing_status = Column(String(255))
-    gargaling_status = Column(String(255))
-    validation_status = Column(String(255))
+    brushing_status = Column(Boolean)
+    gargaling_status = Column(Boolean)
+    validation_status = Column(Boolean)
 
 
 class Admin(Base):
