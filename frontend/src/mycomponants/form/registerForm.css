@@ -3,7 +3,7 @@
 }
 
 .main{
-  background-image: url("background_image.png");
+  background-image: url("image/background_image.png");
   opacity: 1;
   background-repeat: no-repeat;
   background-attachment: fixed; 

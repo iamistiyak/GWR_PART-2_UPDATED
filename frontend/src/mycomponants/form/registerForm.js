@@ -18,7 +18,9 @@ class RegistrationForm extends Component {
     video_link:"",
     brushing_status:false,
     gargaling_status:false,
-    validation_status:true
+    validation_status:true,
+
+    errors:{}
   } 
 
   handleChangeFirstName = e => {
@@ -40,71 +42,60 @@ class RegistrationForm extends Component {
         this.setState({first_name: '', last_name: "", email: '',phone: "",video_link: "",brushing_status: false,gargaling_status: false,validation_status: true,})
     })
   }
-  // initialValues = { firstname: "", lastname: "", email: "", phoneNo: "" };
-  // [formValues, setFormValues] = useState(initialValues);
-    // [formErrors, setFormErrors] = useState({});
-  // [isSubmit, setIsSubmit] = useState(false);
 
-  // handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormValues({ ...formValues, [name]: value });
-  // };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    // setFormErrors(validate(formValues));
-    // setIsSubmit(true);
-    
-    // if (isSubmit){
-    //   this.setState({formValues: initialValues })
-    // }
-
-
-  //   if(!this.state.name || !this.state.image || !this.state.birthDate){
-  //     alert("Name  or URL or Birth-date is empty")
-  // }
-  // else{
-  //   let userData = {first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email, phone: this.state.phone, video_link: this.state.video_link, brushing_status: this.state.brushing_status, gargaling_status: this.state.gargaling_status}
-  //   this.addUser(userData)
-  //   alert("Register Successfully")
-  // }
-  let userData = {first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email, phone: this.state.phone, video_link: this.state.video_link, brushing_status: this.state.brushing_status, gargaling_status: this.state.gargaling_status}
-  this.addUser(userData)
-  alert("Register Successfully")
-  };
-
- 
-
-  validate = (values) => {
-    const errors = {};
+  formValidation = ()=>{
+    const {first_name, last_name, email, phone} = this.state;
+    let isValid = true;
+    const errors={};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     const phoneRegex = /^(?:(?:\+|0{0,2})91(\s*|[\-])?|[0]?)?([6789]\d{2}([ -]?)\d{3}([ -]?)\d{4})$/;
 
-    if (!values.first_name) {
-      errors.first_name = "Firstname is required!";
+    if(!first_name.trim()){
+      errors.firstNameLength = "First name is required!";
+      isValid = false;
     }
-    if (!values.last_name) {
-      errors.last_name = "Lastname is required!";
+    if (!last_name.trim()) {
+      errors.lastNameLength = "Lastname is required!";
+      isValid = false;
     }
-    if (!values.email) {
-      errors.email = "Email is required!";
-    } else if (!regex.test(values.email)) {
-      errors.email = "This is not a valid email format!";
+    if (!email.trim()) {
+      errors.emailLength = "Email is required!";
+      isValid = false;
+    }else if (!regex.test(email.trim())) {
+      errors.emailLength = "This is not a valid email format!";
+      isValid = false;
     }
-    if (!values.phone) {
-      errors.phone = "PhoneNo is required";
-    } else if (!phoneRegex.test(values.phoneNo)) {
-      errors.phoneNo = "This is not a valid phone no format!";
+   if (!phone.trim()) {
+      errors.phoneFormat = "PhoneNo is required";
+      isValid = false;
     } 
-    return errors;
-  };
+    else if (!phoneRegex.test(phone.trim())) {
+      errors.phoneFormat = "Phone number is not a valid!";
+      isValid = false;
+    } 
+    this.setState({errors});
+    return isValid;
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const isvalid = this.formValidation();
+    
+    //--------------------------------Insert data in data base-----------------------------------
+    if(isvalid){
+      let userData = {first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email, phone: this.state.phone, video_link: this.state.video_link, brushing_status: this.state.brushing_status, gargaling_status: this.state.gargaling_status}
+      this.addUser(userData)
+      alert("Register Successfully")
+    }
+};
 
   render(){
+    const {errors} = this.state;
     return (
       <div className=" main">
         <div className="logo">
           <img
-            src={require("./gwr_logo.png")}
+            src={require("./image/gwr_logo.png")}
             alt="img"
             className="img-responsive"
             width={"120px"}
@@ -125,7 +116,7 @@ class RegistrationForm extends Component {
                     value={this.state.first_name} 
                     onChange={this.handleChangeFirstName}
                   />
-                  {/* <p>{formErrors.firstname}</p> */}
+                  <p>{errors.firstNameLength}</p>
                 </div>
           
                 <div className="field name lastname">
@@ -137,7 +128,7 @@ class RegistrationForm extends Component {
                     value={this.state.last_name} 
                     onChange={this.handleChangeLastName}
                   />
-                  {/* <p>{formErrors.lastname}</p> */}
+                  <p>{errors.lastNameLength}</p>
                 </div>
               </div>
   
@@ -150,7 +141,7 @@ class RegistrationForm extends Component {
                   value={this.state.email}                  
                    onChange={this.handleChangeEmail}
                 />
-                 {/* <p>{formErrors.email}</p> */}
+                 <p>{errors.emailLength}</p>
               </div>
   
              <div className="parentPhone">
@@ -173,7 +164,7 @@ class RegistrationForm extends Component {
                         onChange={this.handleChangePhone}
                       />
                     </div>
-                    {/* <p>{formErrors.phoneNo}</p> */}
+                    <p>{errors.phoneFormat}</p>
                   </div>
              </div>
              
