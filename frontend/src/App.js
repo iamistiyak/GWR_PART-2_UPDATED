@@ -1,10 +1,11 @@
-import RegistrationForm from "./mycomponants/form/registerForm";
-
+// import RegistrationForm from "./mycomponents/form/registerForm";
+import Timeline from "./mycomponents/timeline/timeline"
 function App() {
   
   return (
     <div>
-       <RegistrationForm/>
+       {/* <RegistrationForm/> */}
+       <Timeline/>
     </div>
   );
 }

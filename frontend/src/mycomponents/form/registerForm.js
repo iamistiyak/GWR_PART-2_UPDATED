@@ -95,7 +95,7 @@ class RegistrationForm extends Component {
       <div className=" main">
         <div className="logo">
           <img
-            src={require("./image/gwr_logo.png")}
+            src={require("../image/gwr_logo.png")}
             alt="img"
             className="img-responsive"
             width={"120px"}
@@ -169,7 +169,7 @@ class RegistrationForm extends Component {
              </div>
              
             </div>
-            <button className="">Register me</button>
+            <button className="">Registerme</button>
           </form>
         </div>
       </div>
