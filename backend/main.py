@@ -1,5 +1,4 @@
-from fastapi import FastAPI
-from routers.authentication import router  
+from fastapi import FastAPI 
 from routers.user import router as user_router
 from routers.admin import router as admin_router
 import models
@@ -21,7 +20,6 @@ app.add_middleware(
 models.Base.metadata.create_all(bind=engine)
 
 # Routers for the App
-app.include_router(router)
 app.include_router(user_router)
 app.include_router(admin_router)
 
