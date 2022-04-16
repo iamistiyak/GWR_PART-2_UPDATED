@@ -14,38 +14,40 @@
   height: 668px;
 }
 
-.logo{
+.registerLogo{
   position: absolute;
   height: 50px;
   width: 50x;
   background-attachment: fixed; 
-  margin-left: 880px; 
+  margin-left: 875px;
   z-index: 2;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .insideformofparent{
   width: 600px;
   height: 53%;
 }
-.container {
+
+.registerContainer{
   background: #E5E5E5;
   width: 600px;
   height: 70%;
-  margin-top: 80px; 
+  margin-top: 100px; 
   margin-left: 640px; 
   margin-right: 300px;
   border: 1px solid #dfdfdf;
   border-radius: 15px;
   box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.25), inset 20px 20px 50px rgba(0, 0, 0, 0.25);
 }
-.container > form >h1 {
+h1{
     font-family: 'HK Grotesk';
     font-style: 700 bold;
     align-items: left;
     font-size: 20px;
     color: #181818;
     padding-left: 50px;
-    margin-top: 70px;
+    margin-top: 190px;
+    padding-top: 70px;
 }
 
 .firstname{
@@ -65,7 +67,7 @@
 .parentName{
     display: flex;
     margin-left: 50px;
-    margin-top: 10px;
+    margin-top: 20px;
     padding-bottom: 28px;
   }
  
@@ -109,7 +111,7 @@
   padding-top: 20px;
 } 
 
-button {
+.registerButton{
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -124,12 +126,12 @@ button {
   font-weight: bold;
 }
 
-button:hover {
+.registerButton:hover {
   background-color: #ffff;
   color: #002C4D;
   font-weight: bold;
  }
 
-p {
+p{
   color: red;
 }

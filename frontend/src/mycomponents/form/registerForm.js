@@ -1,7 +1,7 @@
-import "./registerForm.css";
-import { useState, React } from "react";
+import {React} from "react";
 import axios from 'axios'
 import { Component } from "react"
+import "./registerForm.css";
 
 const ai = axios.create({
   baseURL:'http://0.0.0.0:8000/'
@@ -48,7 +48,7 @@ class RegistrationForm extends Component {
     let isValid = true;
     const errors={};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    const phoneRegex = /^(?:(?:\+|0{0,2})91(\s*|[\-])?|[0]?)?([6789]\d{2}([ -]?)\d{3}([ -]?)\d{4})$/;
+    const phoneRegex = /^(?:(?:\+|0{0,2})91(\s*|[-])?|[0]?)?([6789]\d{2}([ -]?)\d{3}([ -]?)\d{4})$/;
 
     if(!first_name.trim()){
       errors.firstNameLength = "First name is required!";
@@ -93,7 +93,7 @@ class RegistrationForm extends Component {
     const {errors} = this.state;
     return (
       <div className=" main">
-        <div className="logo">
+        <div className="registerLogo">
           <img
             src={require("../image/gwr_logo.png")}
             alt="img"
@@ -102,7 +102,7 @@ class RegistrationForm extends Component {
             height={"120px"}
           />
         </div>
-        <div className="container">
+        <div className="registerContainer">
           <form onSubmit={this.handleSubmit}>
             <h1>Register for Brushing Teeth Event - Part 2</h1>
             <div className="ui form insideformofparent">
@@ -169,13 +169,12 @@ class RegistrationForm extends Component {
              </div>
              
             </div>
-            <button className="">Registerme</button>
+            <button className="registerButton">Register</button>
           </form>
         </div>
       </div>
     );
   }
-  
   }
   
 export default RegistrationForm;

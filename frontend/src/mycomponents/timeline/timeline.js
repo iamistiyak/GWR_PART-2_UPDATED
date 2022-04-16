@@ -10,8 +10,8 @@ class Timeline extends Component {
     
   render(){
     return (
-      <div className=" main">
-        <div className="logo">
+      <div className="mainTimeline">
+        <div className="timelineLogo">
           <img
             src={require("../image/gwr_logo.png")}
             alt="img"
@@ -20,7 +20,7 @@ class Timeline extends Component {
             height={"120px"}
           />
         </div>
-        <div className="container">
+        <div className="containerTimeline">
           <div className="success">Registered successfully!</div>
           <div className="prepare">Prepare with your brush</div>
           <div className="outside">
@@ -43,7 +43,7 @@ class Timeline extends Component {
               </div>
            </div>
           </div>
-          <button className="button">Start Recording</button>
+          <button className="timelineButton">Start Recording</button>
         </div>
       </div>
     );

@@ -2,9 +2,8 @@
   font-family: 'HK Grotesk';
 }
 
-.main{
+.mainTimeline{
   background-image: url("../image/background_image.png");
-  opacity: 1;
   background-repeat: no-repeat;
   background-attachment: fixed; 
   overflow: hidden;
@@ -14,17 +13,17 @@
   height: 668px;
 }
 
-.logo{
+.timelineLogo{
   position: absolute;
   height: 50px;
   width: 50x;
   background-attachment: fixed; 
-  margin-left: 580px; 
+  padding-left: 570px;
   z-index: 2;
   margin-top: 35px;
 }
     
-.container {
+.containerTimeline{
   background: #E5E5E5;
   width: 1000px;
   height: 75%;
@@ -116,7 +115,7 @@ margin-top: 55px;
 margin-left: 30px;
 }
 
-.button{
+.timelineButton{
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -132,7 +131,7 @@ margin-left: 30px;
   font-size: 10px;
   margin-top: 50px;
 }
-button:hover {
+.timelineButton:hover {
   background-color: #ffff;
   color: #002C4D;
   font-weight: bold;
