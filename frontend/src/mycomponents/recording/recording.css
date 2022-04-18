@@ -60,6 +60,94 @@
     padding-top: 8px;
   }
 
-p{
+.videoFrameBackground{
+  width: 450px;
+  height: 250px;
+  background: #181818;
+  border-radius: 15px;
+  margin-top: 115px;
+  margin-left: 270px;
+  padding-top: 3px;
+  padding-left: 2px;
+}  
+
+.mainVideoCorner{
+  position: absolute;
+  width: 430px;
+  height: 230px;
+  background: #181818;
+  border-radius: 12px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.upperVideoCorner{
+  position: absolute;
+  width: 430px;
+  height: 25px;
+  background: #181818;
+  border-radius: 0px;
+  margin: 0px;
+}
+.upperVideoLeftCorner{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+  margin: 0px;
+  border-style: solid;
+  border-color: #E0E0E0 #181818 #181818 #E0E0E0;
+}
+
+.upperVideoRightCorner{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+  margin-left: 400px;
+  border-style: solid;
+  border-color: #E0E0E0 #E0E0E0 #181818 #181818;
+}
+
+.bottomVideoCorner{
+  position: absolute;
+  width: 430px;
+  height: 25px;
+  background: #181818;
+  border-radius: 0px;
+  margin-top: 200px;
+}
+.bottomVideoLeftCorner{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+  margin: 0px;
+  border-style: solid;
+  border-color:  #181818 #181818 #E0E0E0 #E0E0E0;
+}
+
+.bottomVideoRightCorner{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+  margin-left: 400px;
+  border-style: solid;
+  border-color:  #181818 #E0E0E0  #E0E0E0 #181818;
+}
+
+.videoFrame{
+  position: absolute;
+  width: 415px;
+  height: 215px;
+  background: rgb(218, 210, 210);
+  margin-left: 5px;
+  margin-top: 5px;
+  padding-right: 10px;
+  margin-bottom: 5px;
+  z-index: 2;
+}
+.errorMessage{
     color: #ffff;
 }  

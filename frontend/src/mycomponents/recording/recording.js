@@ -66,6 +66,19 @@ const Recording = () => {
           <div className="timer">
           <p>{`${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`}</p> 
           </div>
+          <div className="videoFrameBackground">
+          <div className="mainVideoCorner">
+            <div className="upperVideoCorner">
+              <div className="upperVideoLeftCorner"></div>
+              <div className="upperVideoRightCorner"></div>
+            </div>
+            <div className="videoFrame"></div>
+            <div className="bottomVideoCorner">
+              <div className="bottomVideoLeftCorner"></div>
+              <div className="bottomVideoRightCorner"></div>
+            </div>
+          </div>
+          </div>
         </div>
         </div>
     );

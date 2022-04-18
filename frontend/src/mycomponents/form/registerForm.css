@@ -132,6 +132,6 @@ h1{
   font-weight: bold;
  }
 
-p{
+.errorMessage1{
   color: red;
-}
+}  

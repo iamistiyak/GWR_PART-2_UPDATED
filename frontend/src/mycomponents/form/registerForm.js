@@ -116,7 +116,7 @@ class RegistrationForm extends Component {
                     value={this.state.first_name} 
                     onChange={this.handleChangeFirstName}
                   />
-                  <p>{errors.firstNameLength}</p>
+                  <p className="errorMessage1">{errors.firstNameLength}</p>
                 </div>
           
                 <div className="field name lastname">
@@ -128,7 +128,7 @@ class RegistrationForm extends Component {
                     value={this.state.last_name} 
                     onChange={this.handleChangeLastName}
                   />
-                  <p>{errors.lastNameLength}</p>
+                  <p className="errorMessage1">{errors.lastNameLength}</p>
                 </div>
               </div>
   
@@ -141,7 +141,7 @@ class RegistrationForm extends Component {
                   value={this.state.email}                  
                    onChange={this.handleChangeEmail}
                 />
-                 <p>{errors.emailLength}</p>
+                 <p className="errorMessage1">{errors.emailLength}</p>
               </div>
   
              <div className="parentPhone">
@@ -164,7 +164,7 @@ class RegistrationForm extends Component {
                         onChange={this.handleChangePhone}
                       />
                     </div>
-                    <p>{errors.phoneFormat}</p>
+                    <p className="errorMessage1">{errors.phoneFormat}</p>
                   </div>
              </div>
              
