@@ -1,12 +1,12 @@
 import {React} from "react";
-import axios from 'axios'
+// import axios from 'axios'
 import { Component } from "react"
 import "./registerForm.css";
 
-const ai = axios.create({
-  baseURL:'http://0.0.0.0:8000/'
+// const ai = axios.create({
+//   baseURL:'http://0.0.0.0:8000/'
 
-})
+// })
 
 class RegistrationForm extends Component {
 
@@ -36,12 +36,12 @@ class RegistrationForm extends Component {
     this.setState({ phone: e.target.value})
   }
 
-  addUser = (data)=>{
-    ai.post('user/', data)
-    .then((res)=>{
-        this.setState({first_name: '', last_name: "", email: '',phone: "",video_link: "",brushing_status: false,gargaling_status: false,validation_status: true,})
-    })
-  }
+  // addUser = (data)=>{
+  //   ai.post('user/', data)
+  //   .then((res)=>{
+  //       this.setState({first_name: '', last_name: "", email: '',phone: "",video_link: "",brushing_status: false,gargaling_status: false,validation_status: true,})
+  //   })
+  // }
 
   formValidation = ()=>{
     const {first_name, last_name, email, phone} = this.state;

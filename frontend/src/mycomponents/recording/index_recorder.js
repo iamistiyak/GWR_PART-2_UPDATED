@@ -2,6 +2,9 @@ import React from 'react'
 import './index_recorder.css'
 const IndexRecording = () => {
     
+    const HEIGHT = 500;
+	const WIDTH = 500;
+
     let video_local = null
     let camera_stream = null;
     let media_recorder = null;
@@ -47,10 +50,18 @@ const IndexRecording = () => {
     return (
         <div className="indexMain">
         <button className="startCamera" id="start-camera" onClick={startCamera}>Start Camera</button>
-        <video className="videoFrame" id="video" width="320" height="240" ></video>
+        <div className="app__container">
+				<video
+					height={HEIGHT}
+					width={WIDTH}
+					muted
+					autoPlay
+					className="videoFrame"
+				></video>
+			</div>
         <button className="startRecording" id="start-record"  onClick={startRecording}>Start Recording</button>
         <button className="stopRecording" id="stop-record"  onClick={stopRecording}>Stop Recording</button>
-        <a href={video_local} className="downloadLink" id="download-video" download="test.webm">Download Video</a>
+        <a href= "" className="downloadLink" id="download-video" download="test.webm">Download Video</a>
         </div>
     );
 }
