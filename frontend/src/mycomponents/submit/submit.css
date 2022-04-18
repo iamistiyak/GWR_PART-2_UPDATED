@@ -1,0 +1,59 @@
+.body{
+    font-family: 'HK Grotesk';
+  }
+  
+  .mainSubmit{
+    background-image: url("../image/background_image.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    overflow: hidden;
+    margin:0px;
+    padding: 0px; 
+    width: 100%;
+    height: 668px;
+  }
+  
+  .submitLogo{
+    position: absolute;
+    height: 50px;
+    width: 50x;
+    background-attachment: fixed; 
+    padding-left: 570px;
+    z-index: 2;
+    margin-top: 35px;
+  }
+      
+  .containerSubmit{
+    background: #E5E5E5;
+    width: 1000px;
+    height: 75%;
+    margin-top: 80px; 
+    margin: auto;
+    margin-top: 100px;
+    border: 1px solid #dfdfdf;
+    border-radius: 15px;
+    box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.25), inset 20px 20px 50px rgba(0, 0, 0, 0.25);
+  }
+  
+.containerSubmit{
+    padding-top: 215px;
+    padding-left: 0px;
+}  
+
+.message1{
+    text-align: center;
+    color: #002B4D;
+    font-family: 'HK Grotesk';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+}
+.message2{
+    text-align: center;
+    color: #002B4D; 
+    font-family: 'HK Grotesk';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    margin-top: 15px;
+}
