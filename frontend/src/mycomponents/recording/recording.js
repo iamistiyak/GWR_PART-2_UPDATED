@@ -5,50 +5,59 @@ import React from 'react'
 
 const Recording = () => {
    
-     const hoursMinSecs = {minutes: 0, seconds: 20}
-    const { minutes = 0, seconds = 0 } = hoursMinSecs;
+     const hoursMinSecs = {minutes: 0, seconds: 3}
+    const { minutes = 0, seconds = 3 } = hoursMinSecs;
     const [[ mins, secs], setTime] = React.useState([minutes, seconds]);
-    
-    // const [[ cont1], setCont] = React.useState([content]);
+
+
+    const message1 = {msg: "Show your brush"};
+    const { msg = ""} = message1;
+    const [message, setMessage] = React.useState([msg]);
+   
+    const isLast1 = {last: true};
+    const { last = true} = isLast1;
+    const [islast1, setIsLast1] = React.useState([last]);
     
     const tick = () => {
    
-        if ( mins === 0 && secs === 0) 
+       if ( mins === 0 && secs === 0) 
         reset()
        else if (secs === 0) {
         setTime([mins - 1, 59]);
-       } else {
+       } 
+       else {
         setTime([mins, secs - 1]);
        }
     };
-    // const content = () => {
-   
+ 
+    const reset = () =>{
+      if(islast1){
+        resetAgain()  
+      }
+      else if(islast1 ===""){
         
-    //   if (secs === 0) {
-    //     setTime([mins - 1, 59]);
-    //    } else {
-    //     setTime([mins, secs - 1]);
-    //    }
-    // };
+      }
+      else{
+        resetAgainAgain()
+      }
+    };
 
+    const resetAgain = () =>{
+      setTime([parseInt(1), parseInt(0)]);
+      setMessage("Brush your teeth");
+      setIsLast1(false);
+    };
+    const resetAgainAgain = () =>{
+      setTime([parseInt(0), parseInt(20)]);
+      setMessage("Rinse your mouth");
+      setIsLast1("")
+    };
 
-
-    // const reset = () => setTime([parseInt(minutes), parseInt(seconds)]);
-    const reset = () => "";
-
-
-    
     React.useEffect(() => {
         const timerId = setInterval(() => tick(), 1000);
         return () => clearInterval(timerId);
     });
 
-    
-    // React.useEffect(() => {
-    //     const contentTimerid = setInterval(() => content(), 20000);
-    //     return () => clearInterval(contentTimerid);
-    // });
-    
     
     return (
         <div className="recordingMain">
@@ -62,7 +71,7 @@ const Recording = () => {
           />
         </div>
         <div className="containerRecording">
-          <div className="instruction">Show your brush</div>
+          <div className="instruction">{message}</div>
           <div className="timer">
           <p>{`${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`}</p> 
           </div>
