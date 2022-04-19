@@ -1,8 +1,9 @@
 from typing import List
-from fastapi import APIRouter,Depends,status
+from fastapi import APIRouter,Depends,status, UploadFile, File
 import schemas, database
 from sqlalchemy.orm import Session
 from repository import user
+import shutil
 
 router = APIRouter(
     prefix="/user",
@@ -16,6 +17,13 @@ get_db = database.get_db
 @router.post('/', status_code=status.HTTP_201_CREATED,)
 def create_user(request: schemas.User, db: Session = Depends(get_db)):
     return user.create(request, db)
+
+# Upload User recording
+@router.post('/rec', status_code=status.HTTP_201_CREATED,)
+async def uploadFile(file: UploadFile = File(...)):
+    with open(f'{file.filename}', "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    return {"file_name": file.filename}
 
 # get all users
 @router.get('/',response_model=List[schemas.ShowUser])

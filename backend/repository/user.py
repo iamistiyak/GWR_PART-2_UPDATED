@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 import models, schemas
-from fastapi import HTTPException,status
-
+from fastapi import HTTPException,status, UploadFile, File
+import shutil
 
 # Create user
 def create(request: schemas.User,db: Session):
@@ -10,6 +10,13 @@ def create(request: schemas.User,db: Session):
     db.commit()
     db.refresh(new_user)
     return new_user
+
+# Upload file
+# def uploadFile(file: UploadFile = File(...)):
+#     with open(f'{file.filename}', "wb") as buffer:
+#         shutil.copyfileobj(file.file, buffer)
+#     return {"file_name": file.filename}
+
 
 # Get all users
 def get_all(db: Session, ):

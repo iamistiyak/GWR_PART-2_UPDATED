@@ -19,7 +19,7 @@ class RegistrationForm extends Component {
     brushing_status:false,
     gargaling_status:false,
     validation_status:true,
-
+    
     errors:{}
   } 
 

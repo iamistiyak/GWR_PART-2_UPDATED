@@ -1,11 +1,12 @@
 import "./recording.css";
 import React from 'react'
-
+import { useRecordWebcam } from 'react-record-webcam'
 
 
 const Recording = () => {
    
-     const hoursMinSecs = {minutes: 0, seconds: 3}
+  //--------------------Timer----------------------------//
+    const hoursMinSecs = {minutes: 0, seconds: 3}
     const { minutes = 0, seconds = 3 } = hoursMinSecs;
     const [[ mins, secs], setTime] = React.useState([minutes, seconds]);
 
@@ -18,6 +19,18 @@ const Recording = () => {
     const { last = true} = isLast1;
     const [islast1, setIsLast1] = React.useState([last]);
     
+  //--------------------Recorder----------------------------//
+    const date = new Date().toLocaleString() + "user_name"
+    const OPTIONS = { 
+        filename: date,
+        recordingLength: 83,
+        fileType: 'mp4',
+        width: 415,
+        height:215
+    }
+
+    const recordWebcam = useRecordWebcam(OPTIONS);
+
     const tick = () => {
    
        if ( mins === 0 && secs === 0) 
@@ -58,9 +71,31 @@ const Recording = () => {
         return () => clearInterval(timerId);
     });
 
-    
+    const upload = (e) =>{
+      console.warn(e.target.files)
+      const files = e.target.files
+      const formData = new FormData();
+      formData.append('img', files[0]);
+      fetch('http://127.0.0.1:8000/user/rec', {
+        method: "POST",
+        body:formData
+      }).then((resp)=>{
+        resp.json().then((result)=>{
+          console.warn("result", result)
+        })
+      })
+    }
+ 
+    const saveFile = async () => {
+      const blob = await recordWebcam.getRecording();
+      // URL.createObjectURL(blob);
+
+      // saveAs(blob,'Meet.mp4')
+      console.log(blob);
+    };
     return (
         <div className="recordingMain">
+        <p>Camera status: {recordWebcam.status}</p>
         <div className="logoRecording">
           <img
             src={require("../image/gwr_logo.png")}
@@ -81,13 +116,23 @@ const Recording = () => {
               <div className="upperVideoLeftCorner"></div>
               <div className="upperVideoRightCorner"></div>
             </div>
-            <div className="videoFrame"></div>
+            <div className="videoFrame">
+            <video ref={recordWebcam.webcamRef} autoPlay muted />
+            </div>
             <div className="bottomVideoCorner">
               <div className="bottomVideoLeftCorner"></div>
               <div className="bottomVideoRightCorner"></div>
             </div>
           </div>
           </div>
+          <div className="uploadFile">
+            <input type="file" onChange={(e)=> upload(e)} name="img"/>
+          </div>
+      <button onClick={recordWebcam.open}>Open camera</button>
+      <button onClick={recordWebcam.start}>Start recording</button>
+      <button onClick={recordWebcam.stop}>Stop recording</button>
+      <button onClick={recordWebcam.download}>Download recording</button>
+      <button onClick={saveFile}>Save file to server</button>
         </div>
         </div>
     );
