@@ -2,6 +2,7 @@ import {React} from "react";
 import axios from 'axios'
 import { Component } from "react"
 import "./registerForm.css";
+// import Timeline from "../timeline/timeline"
 
 const ai = axios.create({
   baseURL:'http://0.0.0.0:8000/'
@@ -85,7 +86,8 @@ class RegistrationForm extends Component {
     if(isvalid){
       let userData = {first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email, phone: this.state.phone, video_link: this.state.video_link, brushing_status: this.state.brushing_status, gargaling_status: this.state.gargaling_status}
       this.addUser(userData)
-      alert("Register Successfully")
+      alert("Register Successfully")  
+      window.location = '/timeline';
     }
 };
 

@@ -6,10 +6,9 @@ import { useRecordWebcam } from 'react-record-webcam'
 const Recording = () => {
    
   //--------------------Timer----------------------------//
-    const hoursMinSecs = {minutes: 0, seconds: 3}
+    const hoursMinSecs = {minutes: 0, seconds: 10}
     const { minutes = 0, seconds = 3 } = hoursMinSecs;
     const [[ mins, secs], setTime] = React.useState([minutes, seconds]);
-
 
     const message1 = {msg: "Show your brush"};
     const { msg = ""} = message1;
@@ -23,7 +22,6 @@ const Recording = () => {
     const date = new Date().toLocaleString() + "user_name"
     const OPTIONS = { 
         filename: date,
-        recordingLength: 83,
         fileType: 'mp4',
         width: 415,
         height:215
@@ -31,6 +29,7 @@ const Recording = () => {
 
     const recordWebcam = useRecordWebcam(OPTIONS);
 
+//----------------------Timer------------------------------------//    
     const tick = () => {
    
        if ( mins === 0 && secs === 0) 
@@ -65,17 +64,42 @@ const Recording = () => {
       setMessage("Rinse your mouth");
       setIsLast1("")
     };
+    
 
-    React.useEffect(() => {
-        const timerId = setInterval(() => tick(), 1000);
-        return () => clearInterval(timerId);
-    });
+  //------------------------------Ontap on button for recording start to stop------------------------------------------//
+    window.onload=function(){
+      var oc = document.getElementById("openCamera");
+      oc.click()
 
-    const upload = (e) =>{
-      console.warn(e.target.files)
-      const files = e.target.files
+      var sc = document.getElementById("startCamera");
+      setTimeout( function() {sc.click()}, 3000);
+
+      var cc = document.getElementById("closeCamera");
+      setTimeout( function() {cc.click()}, 95000);
+
+      var ur = document.getElementById("uploadRecording");
+      setTimeout( function() {ur.click()}, 96000);
+    }
+    const openCamera =  ()=>{
+      console.log("Open camera");
+      recordWebcam.open()
+    }
+  
+    const startCamera = ()=>{
+      recordWebcam.start()
+      console.log("Start Camera");
+    }
+
+    const closeCamera = ()=>{
+      console.log("Close Camera");
+      recordWebcam.stop()
+    }
+
+    const uploadRecording = async ()=>{
+
+      const blob = await recordWebcam.getRecording(); 
       const formData = new FormData();
-      formData.append('img', files[0]);
+      formData.append('file', blob);
       fetch('http://127.0.0.1:8000/user/rec', {
         method: "POST",
         body:formData
@@ -84,15 +108,14 @@ const Recording = () => {
           console.warn("result", result)
         })
       })
+      console.log("Recording uploaded");
     }
  
-    const saveFile = async () => {
-      const blob = await recordWebcam.getRecording();
-      // URL.createObjectURL(blob);
+    React.useEffect(() => {
+        const timerId = setInterval(() => tick(), 1000);
+        return () => clearInterval(timerId);
+    });
 
-      // saveAs(blob,'Meet.mp4')
-      console.log(blob);
-    };
     return (
         <div className="recordingMain">
         <p>Camera status: {recordWebcam.status}</p>
@@ -125,16 +148,13 @@ const Recording = () => {
             </div>
           </div>
           </div>
-          <div className="uploadFile">
-            <input type="file" onChange={(e)=> upload(e)} name="img"/>
-          </div>
-      <button onClick={recordWebcam.open}>Open camera</button>
-      <button onClick={recordWebcam.start}>Start recording</button>
-      <button onClick={recordWebcam.stop}>Stop recording</button>
-      <button onClick={recordWebcam.download}>Download recording</button>
-      <button onClick={saveFile}>Save file to server</button>
-        </div>
-        </div>
+      <button id="openCamera" onClick={openCamera} hidden>Open camera</button>
+      <button id="startCamera" onClick={startCamera} hidden>Start recording</button>
+      <button id="closeCamera" onClick={closeCamera} hidden>Stop recording</button>
+      <button id="uploadRecording" onClick={uploadRecording} hidden>Save file to server</button>
+      {/* <button onClick={recordWebcam.download} hidden>Download recording</button> */}
+      </div>
+      </div>
     );
 }
 

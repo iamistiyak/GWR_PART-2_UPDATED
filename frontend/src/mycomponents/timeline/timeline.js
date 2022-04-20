@@ -7,7 +7,11 @@ import { Component } from "react"
 
 class Timeline extends Component {
 
+  handleSubmit = () => {
     
+    window.location = '/recording';
+};
+
   render(){
     return (
       <div className="mainTimeline">
@@ -29,7 +33,7 @@ class Timeline extends Component {
             <div className="timelineContainer">
                 <div class="circle">01</div> 
                 <div class="circleBelow">Show your brush</div> 
-                <div class="time">03 seconds</div> 
+                <div class="time">10 seconds</div> 
               </div>
               <div className="timelineContainer">
                 <div class="circle">02</div> 
@@ -43,7 +47,7 @@ class Timeline extends Component {
               </div>
            </div>
           </div>
-          <button className="timelineButton">Start Recording</button>
+          <button className="timelineButton" onClick={this.handleSubmit} >Start Recording</button>
         </div>
       </div>
     );
