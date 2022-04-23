@@ -42,7 +42,7 @@
   color: #002C4D;
   margin-top:70px;
   margin-left: 390px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 .prepare{
   font-family: 'HK Grotesk';
@@ -50,13 +50,13 @@
   font-weight: 500;
   font-size: 72px;
   color: #002C4D;
-  margin-top:100px;
+  margin-top:1px;
   margin-left: 150px;
   margin-bottom: 50px;
 }
 
 .inside{
-  margin:-20px auto 0 auto;
+  margin:-27px auto 0 auto;
 }
 .horizontalLine{
   margin-top: 40px;

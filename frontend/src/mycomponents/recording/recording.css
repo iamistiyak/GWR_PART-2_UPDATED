@@ -44,6 +44,16 @@
     margin-left: 420px;
     margin-bottom: 20px;
   }
+  .instructionUploading{
+    font-family: 'HK Grotesk';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: #002C4D;
+    margin-top:70px;
+    margin-left: 270px;
+    margin-bottom: 20px;
+  }
  
   .timer{
     position: absolute;
@@ -59,7 +69,28 @@
     margin-left: 430px;
     padding-top: 8px;
   }
-
+  .timerUploader{
+    position: absolute;
+    width: 450px;
+    height: 15px;
+    background: #E5E5E5;
+    border-radius: 10px;
+    color: #ffff;
+    font-weight:300px;
+    font-size: 25px;
+    line-height: 80px;  
+    text-align: center;
+    margin-left: 270px;
+    padding-top: 8px;
+  }
+  .bg-SOME_NAME{
+    background-color: #002C4D!important;
+  }
+.downloadIcon{
+  margin-bottom: 50px;
+  margin-left: 0px;
+  padding-left: 0px;
+}
 .videoFrameBackground{
   width: 450px;
   height: 250px;
@@ -148,3 +179,4 @@
   margin-bottom: 5px;
   z-index: 2;
 }
+

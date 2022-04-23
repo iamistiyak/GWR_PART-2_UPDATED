@@ -2,7 +2,7 @@ import {React} from "react";
 import axios from 'axios'
 import { Component } from "react"
 import "./registerForm.css";
-// import Timeline from "../timeline/timeline"
+
 
 const ai = axios.create({
   baseURL:'http://0.0.0.0:8000/'
@@ -10,7 +10,7 @@ const ai = axios.create({
 })
 
 class RegistrationForm extends Component {
-
+  
   state = {
     first_name: "",
     last_name:"",
@@ -106,7 +106,7 @@ class RegistrationForm extends Component {
         </div>
         <div className="registerContainer">
           <form onSubmit={this.handleSubmit}>
-            <h1>Register for Brushing Teeth Event - Part 2</h1>
+            <h1 className="heading">Register for Brushing Teeth Event - Part 2</h1>
             <div className="ui form insideformofparent">
               <div className="parentName">
                 <div className="field name firstname">

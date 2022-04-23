@@ -1,6 +1,9 @@
 import "./recording.css";
 import React from 'react'
 import { useRecordWebcam } from 'react-record-webcam'
+import 'bootstrap/dist/css/bootstrap.css';
+import ProgressBar from 'react-bootstrap/ProgressBar'
+import axios from "axios";
 
 
 const Recording = () => {
@@ -27,8 +30,16 @@ const Recording = () => {
         height:215
     }
 
-    const recordWebcam = useRecordWebcam(OPTIONS);
+  const recordWebcam = useRecordWebcam(OPTIONS);
 
+  //--------------------Uploading----------------------------//
+  const isUpload = {upload: true};
+  const {upload = true} = isUpload;
+  const [isupload, setIsUpload] = React.useState([upload]);
+
+  const percentage = {uploadPer: 0};
+  const {uploadPer = 0} = percentage;
+  const [isUploadPercentage, setUploadPercentage] = React.useState([uploadPer]);
 //----------------------Timer------------------------------------//    
     const tick = () => {
    
@@ -64,7 +75,6 @@ const Recording = () => {
       setMessage("Rinse your mouth");
       setIsLast1("")
     };
-    
 
   //------------------------------Ontap on button for recording start to stop------------------------------------------//
     window.onload=function(){
@@ -79,7 +89,9 @@ const Recording = () => {
 
       var ur = document.getElementById("uploadRecording");
       setTimeout( function() {ur.click()}, 96000);
-    }
+
+ }
+
     const openCamera =  ()=>{
       console.log("Open camera");
       recordWebcam.open()
@@ -95,27 +107,45 @@ const Recording = () => {
       recordWebcam.stop()
     }
 
+  //Upload data//  
     const uploadRecording = async ()=>{
+        
+        setIsUpload(false);
 
-      const blob = await recordWebcam.getRecording(); 
-      const formData = new FormData();
-      formData.append('file', blob);
-      fetch('http://127.0.0.1:8000/user/rec', {
-        method: "POST",
-        body:formData
-      }).then((resp)=>{
-        resp.json().then((result)=>{
-          console.warn("result", result)
+        const blob = await recordWebcam.getRecording(); 
+        const formData = new FormData();
+        formData.append('file', blob);
+  //---------------------Progress bar--------------------------------//
+
+        axios.post('http://127.0.0.1:8000/user/rec', 
+        formData,
+        {
+          onUploadProgress : (progressEvent)=>{
+            const {loaded, total} = progressEvent;
+            let percent = Math.floor( (loaded * 100) / total )
+            console.log( `${loaded}kb of ${total}kb | ${percent}%` );
+            if( percent < 100 ){
+              setUploadPercentage(percent)
+            }
+          }
+        }
+        ).then((res)=>{
+          console.log("Response", res);
+          setUploadPercentage(100)        
+          setTimeout(() => {setUploadPercentage(0)}, 1000);
+          window.location = '/submit';
         })
-      })
-      console.log("Recording uploaded");
+
+        console.log("Recording uploaded");
+       
     }
- 
+
     React.useEffect(() => {
         const timerId = setInterval(() => tick(), 1000);
         return () => clearInterval(timerId);
     });
-
+    
+   
     return (
         <div className="recordingMain">
         <p>Camera status: {recordWebcam.status}</p>
@@ -129,10 +159,20 @@ const Recording = () => {
           />
         </div>
         <div className="containerRecording">
-          <div className="instruction">{message}</div>
-          <div className="timer">
-          <p>{`${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`}</p> 
-          </div>
+          {
+            isupload?<div className="instruction">{message}</div>
+            :<div className="instructionUploading">Don’t close this window, your video is being uploaded!</div>
+          }
+          
+          {
+            isupload?<div className="timer">
+            <p>{`${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`}</p> 
+            </div>
+            :<div className="timerUploader">
+             { isUploadPercentage > 0 && <ProgressBar variant="SOME_NAME" now={isUploadPercentage}  animated  active label={`${isUploadPercentage}%`} /> }
+            </div>
+          }
+         
           <div className="videoFrameBackground">
           <div className="mainVideoCorner">
             <div className="upperVideoCorner">
@@ -152,10 +192,15 @@ const Recording = () => {
       <button id="startCamera" onClick={startCamera} hidden>Start recording</button>
       <button id="closeCamera" onClick={closeCamera} hidden>Stop recording</button>
       <button id="uploadRecording" onClick={uploadRecording} hidden>Save file to server</button>
-      {/* <button onClick={recordWebcam.download} hidden>Download recording</button> */}
       </div>
+  
       </div>
     );
 }
 
 export default Recording;
+
+  //  <div class="progress">
+  //     <div class="progress__fill"></div>
+  //     <span class="progress__text">0%</span>
+  //   </div> 
